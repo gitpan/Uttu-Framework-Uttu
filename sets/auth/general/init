@@ -1,0 +1,36 @@
+<%doc>
+This does the actual authentication, if $i_auth_username and $i_auth_password
+are present.
+
+This component should output nothing.
+</%doc><%init>
+
+return unless $i_auth_username && $i_auth_password;
+
+my $method = $u -> config -> auth_method;
+
+unless($method) {
+  $u -> note("auth failure", "No authentication method configured.");
+  return;
+}
+
+try {
+  "Uttu::Framework::Uttu::Auth::$method" ->
+    authenticate($i_auth_username, $i_auth_password)
+      or throw Error::Simple "Incorrect username or password.";
+  $u -> note("username", $i_auth_username);
+} otherwise {
+  my $error = shift -> text;
+
+  if($error =~ y:\n:\n: > 1) {
+    $u -> note("auth failure", "Internal error.  $error");
+  } else {
+    $u -> note("auth failure", "$error");
+  }
+};
+
+</%init>
+<%args>
+$i_auth_username => undef
+$i_auth_password => undef
+</%args>

@@ -1,0 +1,4 @@
+<& "/themes/$theme/header", %ARGS &>
+<%init>
+my $theme = $u -> note('theme');
+</%init>

@@ -1,0 +1,23 @@
+<%doc>
+This provides the login box and loggedin box.
+</%doc>
+<form method=post name="login">
+% if($u -> note("username")) {
+<& .authenticated &>
+% } else {
+<& .anonymous, %ARGS &>
+% }
+</form>
+<%def .authenticated>
+<div class="footer">
+Logged in as <% $u -> note("username") |h %>.<br>
+</div>
+</%def>
+<%def .anonymous>
+% my $user = $ARGS{i_auth_username};
+<div class="footer">
+  username: <input class="side_box" type="text" name="i_auth_username" size="10" value="<% $user %>">
+  password: <input class="side_box" type="password" name="i_auth_password" size="10">
+  <input type="submit" name="action" value="Login" class="side_box_button">
+</div>
+</%def>

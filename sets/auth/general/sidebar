@@ -1,0 +1,37 @@
+<%doc>
+This provides the login box and loggedin box.
+</%doc>
+<form method=post name="login">
+% if($u -> note("username")) {
+<& /struct/side_box, title=>'LOGIN', colspan=>1, content=>$m->scomp('.authenticated') &>
+% } else {
+<& /struct/side_box, title=>'LOGIN', colspan=>3, content=>$m->scomp('.anonymous', %ARGS) &>
+% }
+</form>
+<%def .authenticated>
+<tr>
+  <td align=center class="side_box">
+Logged in as <% $u -> note("username") |h %>.<br>
+<a class="side_box" href="?logout=1">Logout</a>
+  </td>
+</tr>
+</%def>
+<%def .anonymous>
+% my $user = $ARGS{i_auth_username};
+<tr>
+  <td align=right class="side_box">username:</td>
+  <td align=left class="side_box" colspan=2><input class="side_box" type="text" name="i_auth_username" size="10" value="<%
+  $user %>"></td>
+</tr><tr>
+  <td align=right class="side_box">password:</td>
+  <td align=left class="side_box"><input class="side_box" type="password" name="i_auth_password" size="10"></td>
+  <td align=left class="side_box"><input type="submit" name="action" value="Login" class="side_box_button"></td>
+</tr><tr>
+% if($u -> note("auth failure")) {
+  <td align=center colspan=3 class="side_box"><% $u -> note("auth failure") %></td>
+</tr><tr>
+% }
+  <td align=left colspan=2 class="side_box"><a class="side_box" href="<% $u -> comp_to_uri('auth/create-account.html') %>">Create account</a></td>
+  <td align=right class="side_box"><a class="side_box" href="<% $u -> comp_to_uri('auth/docs/index.html') %>">More info</a></td>
+</tr>
+</%def>

@@ -1,0 +1,44 @@
+%#$Id: header,v 1.1 2002/03/20 18:13:41 jgsmith Exp $
+<html>
+<head>
+<title><% $toptitle %></title>
+<LINK REL=STYLESHEET TYPE="text/css" HREF="comp:uttu-framework/style.css">
+</head>
+<body>
+<table border=0 width=100% cellspacing=0 cellpadding=1 heigth=100%>
+<tr>
+<td width=540 valign=top height="100%">
+<table border=0 cellpadding=2 height=100% width=100%>
+<tr><td>
+%#% if(0 && $title) {
+%#<h1><% $title %></h1>
+%#% }
+%#<strong>
+%#File:&nbsp;<% $r -> filename %><br>
+%#Uri:&nbsp;<% $r -> uri %><br>
+%#</strong>
+<div align=center style="background-color: #ffcccc">
+<img width=540 height=60 src="/images/uttuhdr.gif" border=0 hspace=0 vspace=0><br>
+</div>
+<& /struct/navigation &>
+% unless($toppage) {
+<& /struct/breadcrumb &>
+% }
+</td></tr><tr><td>
+<%init>
+my $toptitle = "uTtU" . ($title ? " - $title" : "");
+my $toppage;    
+
+if($r -> uri eq $u -> location . "index.html") {
+    $toppage = 1;
+} else {
+    $toppage = 0;
+}
+</%init>
+<%args>
+$title => ""
+</%args>
+<%doc>
+We want to eventually put the path to the actual file right below the
+title, if the person logged in is considered an admin.
+</%doc>

@@ -1,0 +1,18 @@
+ <table border="0" cellpadding="1" cellspacing="0" width="196">
+  <tr>
+   <td class="side_box_outline_bg">
+    <table border="0" cellpadding="2" cellspacing="0" width="194">
+     <tr>
+      <td colspan="<% $colspan %>" class="side_box_title"><% $title %></td>
+     </tr>
+<% $content %>
+    </table>
+   </td>
+  </tr>
+ </table>
+
+<%args>
+$colspan
+$content
+$title
+</%args>

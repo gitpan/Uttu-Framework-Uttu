@@ -1,0 +1,62 @@
+<%doc>
+$Id: autohandler,v 1.1 2002/03/20 18:13:32 jgsmith Exp $
+This is the top-level page-layout definition.  Most pages will be 
+rendered based on this.
+</%doc>
+%#
+%# by default, we require the `exec' attribute for any entity trying to run
+%# a main component
+%#
+<%attr>
+access => all(qw: exec :)
+</%attr>
+%#
+<& "/struct/header", %ARGS, title => $title &>
+<% $body %>
+<& "/struct/footer" , %ARGS&>
+%#
+<%init>
+$r -> content_type("text/html");
+
+$u -> note('theme', "default");
+
+# go through initializers here
+my $inits = $u -> query_components("initializer") || [];
+
+foreach my $c ( @{$inits} ) {
+  try {
+    $m -> scomp($m -> fetch_comp($c), %ARGS);
+  } otherwise {
+  };
+}
+
+my $comp = $m -> fetch_next;
+
+try {
+  my $access = $comp -> attr('access');
+  unless(Uttu::Framework::Uttu::Authz -> user_has_permissions(
+      resource_type => "function", 
+      resource_id   => $u -> note("function"), 
+      access => $access)) {
+      $comp = $m -> fetch_comp("/sys/access_denied");
+  }
+} otherwise {
+};
+
+my $body = $m -> scomp($comp, %ARGS);
+
+my $title;
+
+try {
+    $title = $comp -> attr('title');
+} otherwise_try {
+    $title = $comp -> call_method('title', %ARGS);
+} otherwise {
+    $title = q++;
+};
+
+$title = &$title if ref $title eq 'CODE';
+</%init>
+<%filter>
+s{href="comp:(.*?)(#.*?)?"}{'href="' . $u->comp_to_uri($1) . $2 . '"'}ieg;
+</%filter>

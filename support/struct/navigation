@@ -1,0 +1,9 @@
+<%doc>
+use <& /themes/$theme/navigation:begin &>
+    <& /themes/$theme/navigation:item, component => $comp &>
+    <& /themes/$theme/navigation:end &>
+</%doc>
+<h1>Navigation, etc, probably go here</h1>
+<%init>
+my $theme = $u -> note('theme');
+</%init>

@@ -1,0 +1,70 @@
+%#$Id: footer,v 1.1 2002/03/20 18:13:41 jgsmith Exp $
+%#
+% if($toppage || $u -> note("username")) {
+<!-- Table auto-fill -->&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <!-- end -->
+</td>
+</tr></table></td></td>
+<td valign=top width=10 class="side_bar" height=100%>
+&nbsp;
+</td>
+<td valign=top width=100 class="side_bar" height=100%>
+% foreach my $c (@{$sidecomps}) {
+<& $c, %ARGS &>
+% }
+&nbsp;
+</td>
+</tr><tr><td colspan=4 valign=top align=center class="side_bar" heigth=100%>
+<div class="footer">
+<% $u -> config -> uttu_footer || "Copyright &copy; 2002  Texas A&amp;M University.  All rights reserved." %>
+</div>
+&nbsp;
+</td></tr>
+% } # if($toppage)
+% else {
+</td>
+</tr></table></td>
+</tr><tr><td valign=top class="side_bar" heigth=100%>
+<table border=0 cellspacing=0 cellpadding=0 width=100%>
+<tr>
+  <td align=left>
+  <& /sets/auth/general/footer, %ARGS &>
+  </td><td align=right class="footer">
+<% $u -> config -> uttu_footer || "Copyright &copy; 2002  Texas A&amp;M University.  All rights reserved." %>
+  </td>
+</tr>
+</table>
+</td></tr>
+% }
+</table>
+</body>
+</html>
+<%init>
+my $toppage;
+
+my $sidecomps = $u -> query_components("sidebar") || [];
+
+if($r -> uri eq $u -> location ."index.html" ||
+   $r -> uri eq $u -> location) {
+    $toppage = 1;
+} else {
+    $toppage = 0;
+}
+</%init>

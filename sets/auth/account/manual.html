@@ -1,0 +1,62 @@
+<%attr>
+title => 'Account Manual'
+</%attr>
+<h2>Summary</h2>
+<p>
+An Uttu site account gives you a content area and the ability to publish
+Uttu-related items.  You'll be able to share function sets, frameworks,
+components, documentation, publish Uttu-powered sites, etc.
+<a href="comp:auth/account/create.html">Click here</a> to create an account.
+</p>
+
+<h2>Content Area</h2>
+<p>
+Your content area is a virtual file system of sorts containing folders and
+items. Folders can contain items and other folders.  Items come in various
+types, detailed in the next section.
+</p>
+<p>
+The root of your content area is <code>/user/<emph>user_id</emph></code>,
+usually displayed as <code>/Home</code>.  Underneath the root are three
+standard folders:
+<ul>
+  <li> <code>Stage</code>:  This is where you create and edit items.
+  <li> <code>Live</code>:   This is where you publish items to.  It's the
+			    only area where items can be seen by other
+			    users.
+  <li> <code>Trash</code>:  This is where items go when you delete them.
+			    For a limited time, you can recover
+			    accidentally deleted items from the trash.
+</ul>
+When you first enter you content area, you'll be taken automatically to you
+Stage area.  You can navigate to the other areas manually, though you
+cannot create or edit items there.
+</p>
+
+<h2>Item types</h2>
+
+<p>
+Here are the item types you can currently create.
+<table border=1 cellapdding=2 cellspacing=2>
+<tr>
+  <td>Framework</td>
+  <td>A collection of Mason components, Perl modules, and related
+      documentation, configuration and gettext files which work together to
+      provide a useful environment in which to build function sets.  These
+      should be tarballs with a Makefile.PL using Uttu::MakeMaker.
+  </td>
+</tr>
+<tr>
+  <td>Function set</td>
+  <td>A collection of Mason components, Perl modules, related
+      documentation and gettext files which work together to provide an
+      application.  These should be tarballs with a Makefile.PL using
+      Uttu::MakeMaker.
+  </td>
+</tr>
+<tr>
+  <td>Site description</td>
+  <td>A description of an Uttu-powered web site.
+  </td>
+</tr>
+</table>

@@ -1,0 +1,48 @@
+                     ------------------------
+                     Uttu-Framework-Uttu 0.01
+                     ------------------------
+
+Uttu::Framework::Uttu is a sample (but working) framework that sits atop
+the Uttu module and provides a reasonable environment for building web
+applications.
+
+To install Uttu, download the distribution, untar, and cd into the
+resulting directory.  There, run the following:
+
+  % perl Makefile.PL
+  % make
+  % make test (optional)
+  % make install
+
+
+You will also need to create a MySQL (or equivalent) database with the
+following table:
+
+  CREATE TABLE functions (
+    file char(255) not null,
+    uri  char(255) not null
+  );
+  ALTER TABLE functions ADD INDEX(file);
+  ALTER TABLE functions ADD INDEX(uri);
+
+
+Changing the table name and the field names is acceptable if you specify
+the SQL in the configuration file (see the Uttu perldoc for more
+information).
+
+No non-trivial tests are provided at the moment.  Eventually, the
+Apache::Test framework will be used to test the module.
+
+The author lurks on both the HTML::Mason list and the mod_perl list.  Feel
+free to send questions there.
+
+THIS MODULE IS FOR DEVELOPMENT/TESTING OF UTTU ONLY.  NO WARRANTIES ARE
+MADE CONCERNING THE SUITABILITY OR NON-BROKENNESS OF THE CODE.  USE AT YOUR
+OWN RISK.
+
+Copyright (C) 2002  Texas A&M University.  All Rights Reserved.
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+
+$Id: README,v 1.1 2002/03/20 18:13:12 jgsmith Exp $

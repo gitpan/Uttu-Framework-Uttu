@@ -1,0 +1,18 @@
+<%doc>
+  <& /struct/code_box, contents => "content" &>
+</%doc>
+<p>
+<table border=0 cellpadding=1 cellspacing=0 width="<% $width %>">
+<tr><td class="code_box_outside">
+  <table border=0 cellpadding=1 cellspacing=0 width="100%">
+  <tr><td class="code_box_inside">
+  <pre><% $contents %></pre>
+  </td></tr>
+  </table>
+</td></tr>
+</table>
+</p>
+<%args>
+$contents => ""
+$width => "75%"
+</%args>
